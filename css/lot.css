@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #f6f6f6;
+  overflow: hidden;
+  width: 100%;
+  height: 10rem;
+}
+h1 {
+  line-height: 2rem;
+  font-size: 0.4rem;
+  width: 100%;
+  text-align: center;
+}
+img {
+  width: 2rem;
+  height: 2rem;
+  /* display: none; */
+  margin: 0 auto;
+}
+section {
+  margin: 0 auto;
+  /* perspective: 1000px; */
+}
+#result {
+  width: 100%;
+  height: 0.3rem;
+}
+input {
+  margin: 0 auto;
+}
+#btnEnd {
+  display: none;
+}
+#btnBegin {
+  display: block;
+  text-align: center;
+}
+h3 {
+  font-size: 0.9rem;
+  line-height: 3rem;
+  text-align: center;
+}
+h2 {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  color: #0cc;
+  margin: 0 auto;
+  text-align: center;
+  display: none;
+  box-shadow: 0px 0 10px #0cc;
+  /* text-shadow: 5px 1px 1px blue; */
+  animation: mymove 3s ease;
+}
+
+@keyframes mymove {
+  0% {
+    font-size: 2rem;
+  }
+  70% {
+    /* transform: scale(5);  我们不要用scale 因为他会让 阴影变大*/
+    font-size: 0.5rem;
+  }
+  100% {
+    font-size: 1rem;
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: url(../image/bg1.png) no-repeat;
+  height: 2rem;
+  background-size: 100% 100%;
+
+}
+footer .br {
+  position: absolute;
+  bottom: 0.5rem;
+  background: url(../image/bear.png) no-repeat;
+  width: 200px;
+  height: 100px;
+  animation: bear 1s steps(8) infinite, move 5s forwards;
+}
+
+@keyframes bear {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -1600px 0;
+  }
+}
+
+@keyframes move {
+  0% {
+    left: -4rem;
+  }
+  100% {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

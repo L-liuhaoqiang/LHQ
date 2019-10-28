@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/lot.css" />
+    <script src="./js/jQuery v3.4.1.js"></script>
+    <style>
+     
+    </style>
+  </head>
+  <body>
+    <script>
+      var flag = true;
+      var names = ["1号", "2号", "3号"];
+      var time;
+      var name;
+      var timeEnd;
+
+      // 开始
+      function begin() {
+        document.getElementById("btnBegin").style.display = "none";
+        document.getElementById("btnEnd").style.display = "block";
+        time = setInterval(chouqian, 2);
+        // document.getElementById("image").src = "./image/抽签动态图.jpg";
+        timeEnd = setTimeout(end, 3000);
+      }
+      function chouqian() {
+        var index = Math.floor((Math.random() * 1000) % names.length);
+        name = names[index];
+        document.getElementById("animat").innerHTML = name;
+      }
+      // 一等奖 二等件
+      function jianpin() {
+        var world = document.querySelector("h2");
+        world.style.display = "block";
+        if (name == "1号") {
+          world.innerHTML = "1</br>号";
+        } else if (name == "2号") {
+          world.innerHTML = "2</br>号";
+        } else if (name == "3号") {
+          world.innerHTML = "3</br>号";
+        }
+      }
+      //结束
+      function end() {
+        clearInterval(time);
+        var scale = document.getElementById("image");
+        document.getElementById("btnEnd").src = "./image/占扑.jpg";
+        jianpin();
+        // scale.classList.add("donghua");
+      }
+    </script>
+    <div>
+      <h1>抽签程序</h1>
+      <h3 id="animat">
+        占扑
+      </h3>
+      <!-- <section>
+        <img id="image" src="./image/不.jpg" alt="" />
+      </section> -->
+
+      <h2>展示奖项</h2>
+      <img src="./image/占扑.jpg" id="btnBegin" onclick="begin()" />
+      <img src="./image/签人.gif" id="btnEnd" onclick="end()" />
+      <footer>
+        <article class="br"></article>
+      </footer>
+      <script>
+        var shakeThreshold = 1000; // 定义一个摇动的阈值
+        var lastUpdate = 0; // 记录上一次摇动的时间
+        var x, y, z, lastX, lastY, lastZ; // 定义x、y、z记录三个轴的数据以及上一次触发的数据
+        function zhixing() {
+          // 监听传感器运动事件
+          if (window.DeviceMotionEvent) {
+            window.addEventListener("devicemotion", deviceMotionHandler, false);
+          } else {
+            alert("本设备不支持devicemotion事件");
+          }
+
+          // 运动传感器处理
+          function deviceMotionHandler(eventData) {
+            var acceleration = eventData.accelerationIncludingGravity; // 获取含重力的加速度
+            var curTime = new Date().getTime();
+
+            // 100毫秒进行一次位置判断
+            if (curTime - lastUpdate > 100) {
+              var diffTime = curTime - lastUpdate;
+              lastUpdate = curTime;
+              x = acceleration.x;
+              y = acceleration.y;
+              z = acceleration.z;
+
+              var speed =
+                (Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime) *
+                10000;
+              // 前后x, y, z间的差值的绝对值和时间比率超过了预设的阈值，则判断设备进行了摇晃操作
+              if (speed > shakeThreshold) {
+                if (flag) {
+                  begin();
+                  flag = false;
+                } else {
+                  return;
+                }
+              }
+              lastX = x;
+              lastY = y;
+              lastZ = z;
+            }
+          }
+        }
+        zhixing();
+        document.documentElement.style.fontSize =
+          (document.documentElement.clientWidth / 750) * 100 + "px";
+      </script>
+    </div>
+  </body>
+</html>
